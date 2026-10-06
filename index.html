@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Portafolio Personal</title>
-    <!-- Importar FontAwesome para los iconos de redes sociales -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Estilos CSS integrados para que funcione de inmediato -->
     <style>
         :root {
@@ -119,7 +117,10 @@
 
         /* --- BOTONES --- */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             background-color: var(--primary-color);
             color: var(--white);
             padding: 0.75rem 1.5rem;
@@ -148,7 +149,14 @@
             color: var(--white);
         }
 
-        /* --- ESTILOS NUEVOS PARA BOTONES DE REDES SOCIALES --- */
+        /* Estilo para los iconos locales dentro de los botones */
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        /* --- REDES SOCIALES --- */
         .social-buttons {
             display: flex;
             justify-content: center;
@@ -160,6 +168,7 @@
         .btn-social {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
@@ -206,6 +215,94 @@
 
         .about-card p {
             margin-bottom: 1rem;
+        }
+
+        /* --- GALERÍA SLIDER INTERACTIVA --- */
+        .slider-section {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #0f172a;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0f172a;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
         }
 
         /* --- PROYECTOS / SECCIÓN CONVENIENTE --- */
@@ -284,24 +381,28 @@
             .nav-links {
                 display: none;
             }
+            .slide {
+                height: 280px;
+            }
         }
-.video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Proporción 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 8px; /* Opcional: esquinas redondeadas */
-    margin-bottom: 10px;
-}
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Proporción 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -325,7 +426,9 @@
             <h1>Hola, soy <span style="color: var(--primary-color);">El Muchacho Guapetón</span></h1>
             <p>Docente de Idiomas con estudios en Traducción-Interpretación. Actualmente me encuentro formandome en la carrera de Telemática. Me apasiona crear experiencias digitales atractivas, funcionales y orientadas al usuario.</p>
             <div>
-                <a href="#contacto" class="btn">Contáctame</a>
+                <a href="#contacto" class="btn">
+                    <img src="email.png" alt="Icono Email" class="btn-icon"> Contáctame
+                </a>
                 <a href="#proyectos" class="btn btn-secondary">Ver proyectos</a>
             </div>
         </div>
@@ -339,6 +442,7 @@
     <section id="sobre-mi">
         <h2>Sobre mí</h2>
         <div class="about-card">
+            <h1>Hola, soy <span style="color: var(--primary-color);">El Muchacho Guapetón</span></h1>
             <p>¡Hola! Me dedico a la docencia y diseño de material didáctico. Tengo experiencia transformando ideas complejas en interfaces limpias, intuitivas y responsivas.</p>
             <p>Me encanta aprender nuevas tecnologías y mejorar constantemente mis habilidades para ofrecer soluciones modernas y eficientes.</p>
             <br>
@@ -346,10 +450,29 @@
             <p style="margin-top: 0.5rem; color: var(--primary-color); font-weight: 600;">
                 Lengua Inglesa y Española &bull; Expresión Oral y Escrita  &bull; Medios Dígitales &bull; Investigación &bull; Entorno Linux
             </p>
+
+            <!-- GALERÍA DE SLIDES CONFIGURADA MANUALMENTE -->
+            <div class="slider-section">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Galería de Imágenes</h3>
+                <div class="slider-container">
+                    <button class="slider-btn prev-btn" id="prevBtn">&#10094;</button>
+                    <div class="slider-track" id="sliderTrack">
+                        <div class="slide"><img src="imagen1.jpeg" alt="Imagen 1"></div>
+                        <div class="slide"><img src="imagen2.png" alt="Imagen 2"></div>
+                        <div class="slide"><img src="imagen3.png" alt="Imagen 3"></div>
+                    </div>
+                    <button class="slider-btn next-btn" id="nextBtn">&#10095;</button>
+                </div>
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
         </div>
     </section>
 
-<!-- SECCIÓN CONVENIENTE: PROYECTOS / PORTAFOLIO -->
+    <!-- SECCIÓN PROYECTOS / PORTAFOLIO -->
     <section id="proyectos">
         <h2>Mis Proyectos</h2>
         <div class="projects-grid">
@@ -399,16 +522,18 @@
                     <label for="mensaje">Mensaje</label>
                     <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Enviar mensaje</button>
+                <button type="submit" class="btn" style="width: 100%;">
+                    <img src="email.png" alt="Icono Enviar" class="btn-icon"> Enviar mensaje
+                </button>
             </form>
 
-            <!-- Botones de acceso a Redes Sociales -->
+            <!-- Botones de acceso a Redes Sociales con iconos locales -->
             <div class="social-buttons">
                 <a href="https://youtube.com/@bibliocityadventures?si=gByHu8xTTtsq44e8" target="_blank" rel="noopener noreferrer" class="btn-social btn-youtube">
-                    <i class="fab fa-youtube"></i> YouTube
+                    <img src="youtube.png" alt="YouTube" class="btn-icon"> YouTube
                 </a>
                 <a href="https://mastodon.social/@Profe_Colunga" target="_blank" rel="noopener noreferrer" class="btn-social btn-mastodon">
-                    <i class="fab fa-mastodon"></i> Mastodon
+                    <img src="mastodon.png" alt="Mastodon" class="btn-icon"> Mastodon
                 </a>
             </div>
         </div>
@@ -419,5 +544,40 @@
         <p>&copy; 2026 El Muchacho Guapetón. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- SCRIPT DE LA GALERÍA SLIDER -->
+    <script>
+        const track = document.getElementById('sliderTrack');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+        const dots = Array.from(dotsContainer.children);
+        
+        let currentIndex = 0;
+
+        function updateSlidePosition(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlidePosition(currentIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlidePosition(currentIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlidePosition(currentIndex);
+            });
+        });
+    </script>
 </body>
 </html>
