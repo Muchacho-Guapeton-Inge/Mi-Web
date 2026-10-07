@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio Personal</title>
+    <!-- Estilos CSS integrados para que funcione de inmediato -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-color: #334155;
+            --bg-color: #f8fafc;
+            --white: #ffffff;
+            --gray-light: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        /* --- ENCABEZADO --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- SECCIÓN HERO (BIENVENIDA Y FOTO) --- */
+        .hero {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap-reverse;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+        }
+
+        /* --- FOTO DE PERFIL --- */
+        .profile-pic-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 280px;
+        }
+
+        .profile-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Estilo para los iconos locales dentro de los botones */
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        /* --- REDES SOCIALES --- */
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--white);
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .btn-social:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-youtube {
+            background-color: #ff0000;
+        }
+
+        .btn-mastodon {
+            background-color: #6364ff;
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #1e293b;
+        }
+
+        /* --- SOBRE MÍ --- */
+        .about-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-card p {
+            margin-bottom: 1rem;
+        }
+
+        /* --- GALERÍA SLIDER INTERACTIVA --- */
+        .slider-section {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #0f172a;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0f172a;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* --- PROYECTOS / SECCIÓN CONVENIENTE --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- CONTACTO --- */
+        .contact-container {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1e293b;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Adaptabilidad en móviles */
+        @media (max-width: 768px) {
+            .hero {
+                text-align: center;
+                flex-direction: column-reverse;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-links {
+                display: none;
+            }
+            .slide {
+                height: 280px;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Proporción 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO Y NAVEGACIÓN -->
+    <header>
+        <nav>
+            <div class="logo">El Muchacho Guapetón</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN INICIO / HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Hola, soy <span style="color: var(--primary-color);">El Muchacho Guapetón</span></h1>
+            <p>Docente de Idiomas con estudios en Traducción-Interpretación. Actualmente me encuentro formandome en la carrera de Telemática. Me apasiona crear experiencias digitales atractivas, funcionales y orientadas al usuario.</p>
+            <div>
+                <a href="#contacto" class="btn">
+                    <img src="email.png" alt="Icono Email" class="btn-icon"> Contáctame
+                </a>
+                <a href="#proyectos" class="btn btn-secondary">Ver proyectos</a>
+            </div>
+        </div>
+        <!-- FOTO DE PERFIL -->
+        <div class="profile-pic-container">
+            <img src="mi-foto.jpeg" alt="El Muchacho Guapetón" class="profile-pic">
+        </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE MÍ -->
+    <section id="sobre-mi">
+        <h2>Sobre mí</h2>
+        <div class="about-card">
+            <h1>Hola, soy <span style="color: var(--primary-color);">El Muchacho Guapetón</span></h1>
+            <p>¡Hola! Me dedico a la docencia y diseño de material didáctico. Tengo experiencia transformando ideas complejas en interfaces limpias, intuitivas y responsivas.</p>
+            <p>Me encanta aprender nuevas tecnologías y mejorar constantemente mis habilidades para ofrecer soluciones modernas y eficientes.</p>
+            <br>
+            <h3>Habilidades principales:</h3>
+            <p style="margin-top: 0.5rem; color: var(--primary-color); font-weight: 600;">
+                Lengua Inglesa y Española &bull; Expresión Oral y Escrita  &bull; Medios Dígitales &bull; Investigación &bull; Entorno Linux
+            </p>
+
+            <!-- GALERÍA DE SLIDES CONFIGURADA MANUALMENTE -->
+            <div class="slider-section">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Galería de Imágenes</h3>
+                <div class="slider-container">
+                    <button class="slider-btn prev-btn" id="prevBtn">&#10094;</button>
+                    <div class="slider-track" id="sliderTrack">
+                        <div class="slide"><img src="imagen1.jpeg" alt="Imagen 1"></div>
+                        <div class="slide"><img src="imagen2.png" alt="Imagen 2"></div>
+                        <div class="slide"><img src="imagen3.png" alt="Imagen 3"></div>
+                    </div>
+                    <button class="slider-btn next-btn" id="nextBtn">&#10095;</button>
+                </div>
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN PROYECTOS / PORTAFOLIO -->
+    <section id="proyectos">
+        <h2>Mis Proyectos</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Proyecto 1</h3>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/QwGqmSeosq4" title="Proyecto 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>Video para la materia de "Cultura Digital".</p>
+            </div>
+            
+            <div class="project-card">
+                <h3>Proyecto 2</h3>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/xFGvFiErPpw" title="Proyecto 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>Ejercicio de creación literaria.</p>
+            </div>
+            
+            <div class="project-card">
+                <h3>Proyecto 3</h3>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Xp8t6AYmU78" title="Proyecto 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>Práctica piloto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contact-container">
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #64748b;">¿Tienes algún proyecto en mente o quieres ponerte en contacto? ¡Escríbeme!</p>
+            
+            <!-- Formulario de contacto básico -->
+            <form action="https://formspree.io/f/xyekgqdr" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">
+                    <img src="email.png" alt="Icono Enviar" class="btn-icon"> Enviar mensaje
+                </button>
+            </form>
+
+            <!-- Botones de acceso a Redes Sociales con iconos locales -->
+            <div class="social-buttons">
+                <a href="https://youtube.com/@bibliocityadventures?si=gByHu8xTTtsq44e8" target="_blank" rel="noopener noreferrer" class="btn-social btn-youtube">
+                    <img src="youtube.png" alt="YouTube" class="btn-icon"> YouTube
+                </a>
+                <a href="https://mastodon.social/@Profe_Colunga" target="_blank" rel="noopener noreferrer" class="btn-social btn-mastodon">
+                    <img src="mastodon.png" alt="Mastodon" class="btn-icon"> Mastodon
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>&copy; 2026 El Muchacho Guapetón. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT DE LA GALERÍA SLIDER -->
+    <script>
+        const track = document.getElementById('sliderTrack');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+        const dots = Array.from(dotsContainer.children);
+        
+        let currentIndex = 0;
+
+        function updateSlidePosition(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlidePosition(currentIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlidePosition(currentIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlidePosition(currentIndex);
+            });
+        });
+    </script>
+</body>
+</html>
